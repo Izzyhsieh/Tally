@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.widget.LinearLayout;
 
 
 
@@ -24,6 +25,27 @@ public class ViewPagerActivity extends FragmentActivity {
      _adapter = new ViewPagerAdapter(getApplicationContext(),getSupportFragmentManager());
      _mViewPager.setAdapter(_adapter);
 	 _mViewPager.setCurrentItem(0);
+	 
+	 LinearLayout _mFirstTab = (LinearLayout) findViewById(R.id.first_text);
+	 _mFirstTab.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			_mViewPager.setCurrentItem(0, true);
+		}
+	});
+	 LinearLayout _mSecondTab = (LinearLayout) findViewById(R.id.second_text);
+	 _mSecondTab.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			_mViewPager.setCurrentItem(1, true);
+		}
+	});
+	 
+	 
     }
     private void setTab(){
 			_mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
