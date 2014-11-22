@@ -26,6 +26,7 @@ public class UserDetailsActivity extends Activity {
 	private TextView userNameView;
 	private TextView userGenderView;
 	private TextView userEmailView;
+	private TextView userLocaleView;
 	private Button logoutButton;
 
 	@Override
@@ -38,7 +39,8 @@ public class UserDetailsActivity extends Activity {
 		userNameView = (TextView) findViewById(R.id.userName);
 		userGenderView = (TextView) findViewById(R.id.userGender);
 		userEmailView = (TextView) findViewById(R.id.userEmail);
-
+		userLocaleView = (TextView) findViewById(R.id.userlocale);
+		
 		logoutButton = (Button) findViewById(R.id.logoutButton);
 		logoutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -86,6 +88,9 @@ public class UserDetailsActivity extends Activity {
 								if (user.getProperty("gender") != null) {
 									userProfile.put("gender",
 											(String) user.getProperty("gender"));
+								}
+								if (user.getProperty("locale") != null){
+									userProfile.put("locale", (String) user.getProperty("locale"));
 								}
 								// if (user.getProperty("email") != null) {
 								// userProfile.put("email", (String)
@@ -154,6 +159,12 @@ public class UserDetailsActivity extends Activity {
 					userEmailView.setText(userProfile.getString("email"));
 				} else {
 					userEmailView.setText("");
+				}
+				
+				if (userProfile.has("locale")){
+					userLocaleView.setText(userProfile.getString("locale"));
+				} else{
+					userLocaleView.setText("");
 				}
 
 			} catch (JSONException e) {
