@@ -9,5 +9,6 @@
     <string name="login_intro">Check out your Facebook profile by logging in with the button below!</string>
     <string name="gender">Gender</string>
     <string name="email">Email</string>
+    <string name="indicator_height">3dip</string>
     
 </resources>

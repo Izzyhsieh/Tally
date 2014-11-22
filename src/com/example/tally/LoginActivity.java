@@ -27,7 +27,7 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.main);
+		setContentView(R.layout.login);
 
 		loginButton = (Button) findViewById(R.id.loginButton);
 		loginButton.setOnClickListener(new View.OnClickListener() {
@@ -42,10 +42,15 @@ public class LoginActivity extends Activity {
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
 			// Go to the user info activity
-			showUserDetailsActivity();
+			//showUserDetailsActivity();
+			
+			// Go to main page (viewPager)
+			showMainActivity();
 			onBackPressed();
 		}
 	}
+
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,13 +88,22 @@ public class LoginActivity extends Activity {
 				} else {
 					Log.d(IntegratingFacebookApplication.TAG,
 							"User logged in through Facebook!");
-					showUserDetailsActivity();
+					//showUserDetailsActivity();
+					showMainActivity();
 					onBackPressed();
 				}
 			}
 		});
 	}
-
+	
+	private void showMainActivity() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(this, ViewPagerActivity.class);
+		startActivity(intent);
+		onBackPressed();
+		
+	}
+	
 	private void showUserDetailsActivity() {
 		Intent intent = new Intent(this, UserDetailsActivity.class);
 		startActivity(intent);
