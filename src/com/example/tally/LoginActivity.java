@@ -43,6 +43,7 @@ public class LoginActivity extends Activity {
 		if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
 			// Go to the user info activity
 			showUserDetailsActivity();
+			onBackPressed();
 		}
 	}
 
@@ -83,6 +84,7 @@ public class LoginActivity extends Activity {
 					Log.d(IntegratingFacebookApplication.TAG,
 							"User logged in through Facebook!");
 					showUserDetailsActivity();
+					onBackPressed();
 				}
 			}
 		});
@@ -91,5 +93,6 @@ public class LoginActivity extends Activity {
 	private void showUserDetailsActivity() {
 		Intent intent = new Intent(this, UserDetailsActivity.class);
 		startActivity(intent);
+		onBackPressed();
 	}
 }

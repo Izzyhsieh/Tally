@@ -7,7 +7,7 @@ import com.parse.ParseFacebookUtils;
 
 public class IntegratingFacebookApplication extends Application {
 
-	static final String TAG = "Weasley Clock";
+	static final String TAG = "Tally";
 
 	@Override
 	public void onCreate() {

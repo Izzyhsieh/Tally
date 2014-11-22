@@ -67,6 +67,7 @@ public class UserDetailsActivity extends Activity {
 			// If the user is not logged in, go to the
 			// activity showing the login view.
 			startLoginActivity();
+			onBackPressed();
 		}
 	}
 
@@ -168,6 +169,7 @@ public class UserDetailsActivity extends Activity {
 
 		// Go to the login view
 		startLoginActivity();
+		onBackPressed();
 	}
 
 	private void startLoginActivity() {
@@ -175,5 +177,6 @@ public class UserDetailsActivity extends Activity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
+		onBackPressed();
 	}
 }
