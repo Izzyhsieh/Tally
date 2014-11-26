@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:gravity="center"
         android:paddingBottom="8dip"
         android:paddingLeft="16dip"
         android:paddingRight="16dip"
@@ -29,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/ic_edit" />
 
     </RelativeLayout>
