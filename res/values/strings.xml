@@ -10,5 +10,6 @@
     <string name="gender">Gender</string>
     <string name="email">Email</string>
     <string name="indicator_height">3dip</string>
+    <string name="footer">POST</string>
     
 </resources>

@@ -1,5 +1,7 @@
 package com.example.tally;
 
+import com.example.tally.BottomFragment;
+
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,7 +20,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 		Fragment f = new Fragment();
 		switch(position){
 		case 0:
-			f=LayoutOne.newInstance(_context);	
+			f = new BottomFragment();
+			//f=LayoutOne.newInstance(_context);	
 			break;
 		case 1:
 			f=LayoutTwo.newInstance(_context);	
