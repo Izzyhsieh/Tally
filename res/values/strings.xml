@@ -11,5 +11,20 @@
     <string name="email">Email</string>
     <string name="indicator_height">3dip</string>
     <string name="footer">POST</string>
+    <string name="meal_label">Add new Meal</string>
+    <string name="save_button_text">SAVE</string>
+    <string name="cancel_button_text">CANCEL</string>
+    <string name="title_activity_new_meal">NewMealActivity</string>
+    <string name="title_activity_user_details">UserDetailsActivity</string>
+    <string name="title_activity_view_pager">ViewPagerActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string-array name="ratings_array">
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item></item>
+    </string-array>
     
 </resources>

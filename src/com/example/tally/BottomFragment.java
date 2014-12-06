@@ -26,8 +26,8 @@ import android.view.ViewTreeObserver;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
 
 public class BottomFragment extends ListFragment {
@@ -36,6 +36,7 @@ public class BottomFragment extends ListFragment {
 	//private TextView mQuickReturnView;
 	private RelativeLayout mQuickReturnView;
 	private int mQuickReturnHeight;
+	private ImageView postBtn;
 
 	private static final int STATE_ONSCREEN = 0;
 	private static final int STATE_OFFSCREEN = 1;
@@ -52,6 +53,13 @@ public class BottomFragment extends ListFragment {
 		View view = inflater.inflate(R.layout.footer_fragment, null);
 		//mQuickReturnView = (TextView) view.findViewById(R.id.footer);
 		mQuickReturnView = (RelativeLayout) view.findViewById(R.id.footer);
+		postBtn = (ImageView) mQuickReturnView.findViewById(R.id.btn_post);
+		postBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+								
+			}
+		});
 		return view;
 	}
 
