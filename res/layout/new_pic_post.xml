@@ -27,8 +27,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:adjustViewBounds="true" 
-            android:maxHeight="50dp"
-            android:maxWidth="50dp"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
             android:src="@drawable/ic_action_camera" />
 
         <ImageView
@@ -39,9 +39,19 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:adjustViewBounds="true" 
-            android:maxWidth="50dp"  
-  			android:maxHeight="50dp"
+            android:maxWidth="40dp"  
+  			android:maxHeight="40dp"
             android:src="@drawable/ic_action_gallery" />
+
+        <ImageView
+            android:id="@+id/post_rotate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
+            android:src="@drawable/ic_action_rotate" />
 
     </RelativeLayout>
 

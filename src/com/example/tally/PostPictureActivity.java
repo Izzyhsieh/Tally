@@ -21,6 +21,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.Toast;
 
 public class PostPictureActivity extends Activity{
 	
@@ -29,6 +31,7 @@ public class PostPictureActivity extends Activity{
 	private final static int CAMERA = 66;
 	private final static int PHOTO = 99;
 	private Uri fileuri;
+	private Bitmap bitmap;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	
 	@Override
@@ -44,6 +47,7 @@ public class PostPictureActivity extends Activity{
 	    mPic = (ImageView) findViewById(R.id.post_pic);
 	    ImageView btn_camera = (ImageView) findViewById(R.id.post_camera);
 	    ImageView btn_gallery = (ImageView) findViewById(R.id.post_gallery);
+	    ImageView btn_rotate = (ImageView) findViewById(R.id.post_rotate);
 	    
 	    btn_camera.setOnClickListener(new View.OnClickListener() {
 			
@@ -70,6 +74,23 @@ public class PostPictureActivity extends Activity{
 		        intent.setType("image/*");
 		        intent.setAction(Intent.ACTION_GET_CONTENT);
 		        startActivityForResult(intent, PHOTO);
+			}
+		});
+	    
+	    btn_rotate.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//rotate image
+				if (bitmap == null){
+					Toast.makeText(getApplicationContext(), R.string.msg_warning_rotate, Toast.LENGTH_SHORT).show();
+				}else{
+					Matrix matrix = new Matrix();
+					matrix.setRotate(90);
+					Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+					bitmap = rotatedBitmap;			//re-asign for user would re-clicked rotate and functional
+					mPic.setImageBitmap(rotatedBitmap);
+				}
 			}
 		});
 	}
@@ -123,7 +144,7 @@ public class PostPictureActivity extends Activity{
 	        ContentResolver cr = this.getContentResolver();
 	        
 	        try{
-				Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+				bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
 				if(bitmap.getWidth()>bitmap.getHeight())ScalePic(bitmap,mPhone.heightPixels);
 				else ScalePic(bitmap,mPhone.widthPixels);
 				
