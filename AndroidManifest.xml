@@ -6,8 +6,9 @@
 	
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     
     <uses-sdk
         android:minSdkVersion="11"
@@ -42,7 +43,8 @@
         
         <activity android:name="com.example.tally.NewMealActivity"
             	  android:label="@string/title_activity_new_meal" />
-        
+        <activity android:name="com.example.tally.PostPictureActivity"
+            	  android:label="@string/title_activity_post_picture" />
         <meta-data android:name="com.facebook.sdk.ApplicationId" 
             android:value="@string/app_id"/>
         

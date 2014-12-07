@@ -16,6 +16,7 @@
 package com.example.tally;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -57,7 +58,7 @@ public class BottomFragment extends ListFragment {
 		postBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-								
+				onPostButtonClicked();
 			}
 		});
 		return view;
@@ -158,5 +159,11 @@ public class BottomFragment extends ListFragment {
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
 			}
 		});
+	}
+	
+	private void onPostButtonClicked() {
+		// TODO Auto-generated method stub
+		Intent i = new Intent(getActivity(),PostPictureActivity.class);
+		startActivity(i);
 	}
 }
