@@ -17,14 +17,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.Toast;
 
-public class PostPictureActivity extends Activity{
+public class PostPictureActivity extends ActionBarActivity{
 	
 	private ImageView mPic;
 	private DisplayMetrics mPhone;
@@ -93,7 +97,22 @@ public class PostPictureActivity extends Activity{
 				}
 			}
 		});
+	    
+	    ActionBar actionbar = getSupportActionBar();
+	    actionbar.setDisplayHomeAsUpEnabled(true);
+	    actionbar.setDisplayShowTitleEnabled(false);
 	}
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.menu_post_pic, menu);
+//	    return true;
+		return super.onCreateOptionsMenu(menu);
+	}
+
 
 	protected Uri getOutputMediaFileUri(int type) {
 		return Uri.fromFile(getOutputMediaFile(type));
