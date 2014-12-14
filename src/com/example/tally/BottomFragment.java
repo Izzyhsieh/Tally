@@ -15,6 +15,9 @@
  */
 package com.example.tally;
 
+import com.parse.ParseObject;
+import com.parse.ParseQueryAdapter;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
@@ -45,6 +48,8 @@ public class BottomFragment extends ListFragment {
 	private int mState = STATE_ONSCREEN;
 	private int mScrollY;
 	private int mMinRawY = 0;
+	
+	private ParseQueryAdapter<ParseObject> mainAdapter;
 
 	private TranslateAnimation anim;
 
@@ -69,7 +74,7 @@ public class BottomFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		mListView = (QuickReturnListView) getListView();
-
+/*
 		String[] array = new String[] { "Android", "Android", "Android",
 				"Android", "Android", "Android", "Android", "Android",
 				"Android", "Android", "Android", "Android", "Android",
@@ -77,7 +82,9 @@ public class BottomFragment extends ListFragment {
 
 		setListAdapter(new ArrayAdapter<String>(getActivity(),
 				R.layout.list_item, R.id.text1, array));
-
+*/
+		setListAdapter(new MealAdapter(getActivity()));
+		
 		mListView.getViewTreeObserver().addOnGlobalLayoutListener(
 				new ViewTreeObserver.OnGlobalLayoutListener() {
 					@Override
@@ -97,6 +104,7 @@ public class BottomFragment extends ListFragment {
 				int translationY = 0;
 
 				if (mListView.scrollYIsComputed()) {
+					mListView.computeScrollY();
 					mScrollY = mListView.getComputedScrollY();
 				}
 
