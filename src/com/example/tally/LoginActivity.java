@@ -84,7 +84,9 @@ public class LoginActivity extends Activity {
 				} else if (user.isNew()) {
 					Log.d(IntegratingFacebookApplication.TAG,
 							"User signed up and logged in through Facebook!");
-					showUserDetailsActivity();
+					//showUserDetailsActivity();
+					showMainActivity();
+					onBackPressed();
 				} else {
 					Log.d(IntegratingFacebookApplication.TAG,
 							"User logged in through Facebook!");
