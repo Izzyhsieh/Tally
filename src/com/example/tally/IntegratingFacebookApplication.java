@@ -13,7 +13,7 @@ public class IntegratingFacebookApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-
+		
 		Parse.initialize(this, "5vjG9jI9RQYPzldbp60twfEFXBpVIhhAqnNCmhG0",
 				"v9O9kmwjoe6qvMwKaMJEv9AhTDxLZwhusO2En0Qh");
 

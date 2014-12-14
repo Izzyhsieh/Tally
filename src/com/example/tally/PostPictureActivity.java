@@ -1,13 +1,21 @@
 package com.example.tally;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +31,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -36,14 +45,16 @@ public class PostPictureActivity extends ActionBarActivity{
 	private final static int PHOTO = 99;
 	private Uri fileuri;
 	private Bitmap bitmap;
+	private ParseFile photoFile;
 	public static final int MEDIA_TYPE_IMAGE = 1;
+	private Context mContext;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_pic_post);
-		
+		mContext = this;
 		//get mobile resolution
 		mPhone = new DisplayMetrics();
 	    getWindowManager().getDefaultDisplay().getMetrics(mPhone);
@@ -189,10 +200,55 @@ public class PostPictureActivity extends ActionBarActivity{
 	                                                   mMat,
 	                                                   false);
 	        mPic.setImageBitmap(mScaleBitmap);
-			
+	        this.bitmap = mScaleBitmap;
 		}else{
 			mPic.setImageBitmap(bitmap);
 		}
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()){
+			case R.id.action_post :
+				postPicMeal();
+				return true;
+			default : 
+				return super.onOptionsItemSelected(item);
+			
+		}
+	}
+
+
+	private void postPicMeal() {
+		//save image to parse object
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+
+		byte[] scaledData = bos.toByteArray();
+
+		// Save the scaled image to Parse
+		
+		photoFile = new ParseFile(new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg", scaledData);
+		photoFile.saveInBackground();
+		
+		
+		//create new Meal
+		ParseObject meal = new ParseObject("Picture");
+		meal.put("owner", ParseUser.getCurrentUser());
+		meal.put("image", photoFile);
+		meal.saveInBackground(new SaveCallback(){
+			@Override
+			public void done(ParseException e) {
+				if (e != null){
+		            Toast.makeText(mContext ,"Error saving: " + e.getMessage(),Toast.LENGTH_LONG).show();
+		        }else{
+		        	Toast.makeText(mContext, "Picture uploaded", Toast.LENGTH_LONG).show();
+		        	finish();
+		        }
+		     }
+		});
 	}
 
 }
