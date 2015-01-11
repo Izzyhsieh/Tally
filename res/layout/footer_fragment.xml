@@ -6,8 +6,9 @@
     
     <com.example.tally.QuickReturnListView
         android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@null" />
 
     <RelativeLayout
         android:id="@+id/footer"
