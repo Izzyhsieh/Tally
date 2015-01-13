@@ -213,6 +213,9 @@ public class PostPictureActivity extends ActionBarActivity {
 		case R.id.action_post:
 			postPicMeal();
 			return true;
+		case android.R.id.home:
+			finish();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 
