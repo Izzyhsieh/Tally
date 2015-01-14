@@ -20,6 +20,7 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_post_picture">PostPictureActivity</string>
     <string name="msg_warning_rotate">Please choose a pictore first.</string>
+    <string name="default_msg_second_page">You have not upload any picture yet.</string>
     <string-array name="ratings_array">
         <item>5</item>
         <item>4</item>

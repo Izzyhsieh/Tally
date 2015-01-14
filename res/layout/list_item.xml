@@ -53,24 +53,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- <TextView
-            android:id="@+id/txtStatusMsg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="@dimen/item_status_pad_left_right"
-            android:paddingRight="@dimen/item_status_pad_left_right"
-            android:paddingTop="@dimen/item_status_pad_top" />
-
-        <TextView
-            android:id="@+id/txtUrl"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:linksClickable="true"
-            android:paddingBottom="10dp"
-            android:paddingLeft="@dimen/item_status_pad_left_right"
-            android:paddingRight="@dimen/item_status_pad_left_right"
-            android:textColorLink="@color/link" /> -->
 
         <com.example.tally.FeedImageView
             android:id="@+id/image_view"
@@ -81,18 +63,4 @@
             android:paddingTop="@dimen/item_profile_info_padd"
             android:visibility="visible" />
     </LinearLayout>
-    
-    <!-- <com.parse.ParseImageView
-        android:id="@+id/parse_view"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
-    
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="100dip"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/black" /> -->
-
 </LinearLayout>
