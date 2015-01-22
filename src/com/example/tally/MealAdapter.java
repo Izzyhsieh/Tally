@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
@@ -39,6 +40,7 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 		super.getItemView(meal, v, parent);
 		TextView name = (TextView) v.findViewById(R.id.name);
 		TextView timestamp = (TextView) v.findViewById(R.id.timestamp);
+		RatingBar rating = (RatingBar) v.findViewById(R.id.ratingBar);
 		ProfilePictureView profilePic = (ProfilePictureView) v.findViewById(R.id.profilePic);
 		FeedImageView imageView = (FeedImageView) v.findViewById(R.id.image_view);
 
@@ -64,6 +66,7 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 			e.printStackTrace();
 		}
 		timestamp.setText(meal.getCreatedAt().toLocaleString());
+		rating.setRating(meal.getNumber("rate").floatValue());
 
 		// image view
 		ParseFile photoFile = meal.getParseFile("image");
