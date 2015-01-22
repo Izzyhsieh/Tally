@@ -15,9 +15,6 @@
  */
 package com.example.tally;
 
-import com.parse.ParseObject;
-import com.parse.ParseQueryAdapter;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
@@ -29,15 +26,18 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.RelativeLayout;
+
+import com.parse.ParseObject;
+import com.parse.ParseQueryAdapter;
 
 public class BottomFragment extends ListFragment {
 
 	private QuickReturnListView mListView;
-	//private TextView mQuickReturnView;
+	// private TextView mQuickReturnView;
 	private RelativeLayout mQuickReturnView;
 	private int mQuickReturnHeight;
 	private ImageView postBtn;
@@ -48,16 +48,15 @@ public class BottomFragment extends ListFragment {
 	private int mState = STATE_ONSCREEN;
 	private int mScrollY;
 	private int mMinRawY = 0;
-	
+
 	private ParseQueryAdapter<ParseObject> mainAdapter;
 
 	private TranslateAnimation anim;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.footer_fragment, null);
-		//mQuickReturnView = (TextView) view.findViewById(R.id.footer);
+		// mQuickReturnView = (TextView) view.findViewById(R.id.footer);
 		mQuickReturnView = (RelativeLayout) view.findViewById(R.id.footer);
 		postBtn = (ImageView) mQuickReturnView.findViewById(R.id.btn_post);
 		postBtn.setOnClickListener(new View.OnClickListener() {
@@ -74,31 +73,31 @@ public class BottomFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		mListView = (QuickReturnListView) getListView();
-/*
-		String[] array = new String[] { "Android", "Android", "Android",
-				"Android", "Android", "Android", "Android", "Android",
-				"Android", "Android", "Android", "Android", "Android",
-				"Android", "Android", "Android" };
+		/*
+		 * String[] array = new String[] { "Android", "Android", "Android",
+		 * "Android", "Android", "Android", "Android", "Android", "Android",
+		 * "Android", "Android", "Android", "Android", "Android", "Android",
+		 * "Android" };
+		 * 
+		 * setListAdapter(new ArrayAdapter<String>(getActivity(),
+		 * R.layout.list_item, R.id.text1, array));
+		 */
+		// if you extend this, layoutTwo will also create the MealAdapter here~
+		// so if you want to extends, you need make some revised~
+		setListAdapter(createAdapter());
 
-		setListAdapter(new ArrayAdapter<String>(getActivity(),
-				R.layout.list_item, R.id.text1, array));
-*/
-		setListAdapter(new MealAdapter(getActivity()));
-		
-		mListView.getViewTreeObserver().addOnGlobalLayoutListener(
-				new ViewTreeObserver.OnGlobalLayoutListener() {
-					@Override
-					public void onGlobalLayout() {
-						mQuickReturnHeight = mQuickReturnView.getHeight();
-						mListView.computeScrollY();
-					}
-				});
+		mListView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				mQuickReturnHeight = mQuickReturnView.getHeight();
+				mListView.computeScrollY();
+			}
+		});
 
 		mListView.setOnScrollListener(new OnScrollListener() {
 			@SuppressLint("NewApi")
 			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem,
-					int visibleItemCount, int totalItemCount) {
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
 				mScrollY = 0;
 				int translationY = 0;
@@ -152,8 +151,7 @@ public class BottomFragment extends ListFragment {
 
 				/** this can be used if the build is below honeycomb **/
 				if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB) {
-					anim = new TranslateAnimation(0, 0, translationY,
-							translationY);
+					anim = new TranslateAnimation(0, 0, translationY, translationY);
 					anim.setFillAfter(true);
 					anim.setDuration(0);
 					mQuickReturnView.startAnimation(anim);
@@ -168,10 +166,14 @@ public class BottomFragment extends ListFragment {
 			}
 		});
 	}
-	
+
+	public ListAdapter createAdapter() {
+		return new MealAdapter(getActivity());
+	}
+
 	private void onPostButtonClicked() {
 		// TODO Auto-generated method stub
-		Intent i = new Intent(getActivity(),PostPictureActivity.class);
+		Intent i = new Intent(getActivity(), PostPictureActivity.class);
 		startActivity(i);
 	}
 }

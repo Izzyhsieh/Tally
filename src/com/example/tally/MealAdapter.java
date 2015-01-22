@@ -31,6 +31,10 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 		});
 	}
 
+	public MealAdapter(Context context, com.parse.ParseQueryAdapter.QueryFactory<ParseObject> queryFactory) {
+		super(context, queryFactory);
+	}
+
 	public View getItemView(ParseObject meal, View v, ViewGroup parent) {
 
 		if (v == null) {
@@ -93,14 +97,6 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 		} else {
 			imageView.setVisibility(View.GONE);
 		}
-
-		// ParseImageView mealImage = (ParseImageView) v
-		// .findViewById(R.id.parse_view);
-		// ParseFile photoFile = meal.getParseFile("image");
-		// if (photoFile != null) {
-		// mealImage.setParseFile(photoFile);
-		// mealImage.loadInBackground();
-		// }
 
 		return v;
 	}
