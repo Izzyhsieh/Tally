@@ -3,8 +3,8 @@ package com.example.tally;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.android.volley.VolleyError;
@@ -248,7 +248,7 @@ public class FeedImageView extends ImageView {
 	 * Adjusting imageview height
 	 * */
 	private void adjustImageAspect(int bWidth, int bHeight) {
-		LinearLayout.LayoutParams params = (LayoutParams) getLayoutParams();
+		ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) getLayoutParams();
 
 		if (bWidth == 0 || bHeight == 0)
 			return;

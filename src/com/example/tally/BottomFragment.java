@@ -27,12 +27,12 @@ import android.view.ViewTreeObserver;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 
 import com.parse.ParseObject;
-import com.parse.ParseQueryAdapter;
 
 public class BottomFragment extends ListFragment {
 
@@ -48,8 +48,6 @@ public class BottomFragment extends ListFragment {
 	private int mState = STATE_ONSCREEN;
 	private int mScrollY;
 	private int mMinRawY = 0;
-
-	private ParseQueryAdapter<ParseObject> mainAdapter;
 
 	private TranslateAnimation anim;
 
@@ -73,17 +71,6 @@ public class BottomFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		mListView = (QuickReturnListView) getListView();
-		/*
-		 * String[] array = new String[] { "Android", "Android", "Android",
-		 * "Android", "Android", "Android", "Android", "Android", "Android",
-		 * "Android", "Android", "Android", "Android", "Android", "Android",
-		 * "Android" };
-		 * 
-		 * setListAdapter(new ArrayAdapter<String>(getActivity(),
-		 * R.layout.list_item, R.id.text1, array));
-		 */
-		// if you extend this, layoutTwo will also create the MealAdapter here~
-		// so if you want to extends, you need make some revised~
 		setListAdapter(createAdapter());
 
 		mListView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -91,6 +78,29 @@ public class BottomFragment extends ListFragment {
 			public void onGlobalLayout() {
 				mQuickReturnHeight = mQuickReturnView.getHeight();
 				mListView.computeScrollY();
+			}
+		});
+		
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				FeedImageView imageView = (FeedImageView) view.findViewById(R.id.image_view); 
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), EnlargeImageViewActivity.class);
+				//get ParseObject the image's url via adapter
+				ParseObject meal = (ParseObject) parent.getAdapter().getItem(position);
+				String imageURL = meal.getParseFile("image").getUrl();
+				intent.putExtra("imageURL", imageURL);
+				intent.putExtra("position", position);
+				int[] location = new int[2];
+				imageView.getLocationOnScreen(location);
+				intent.putExtra("locationX", location[0]);
+				intent.putExtra("locationY", location[1]);
+				intent.putExtra("width", imageView.getWidth());
+				intent.putExtra("height", imageView.getHeight());
+				startActivity(intent); 
 			}
 		});
 
