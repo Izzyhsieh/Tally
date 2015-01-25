@@ -189,14 +189,12 @@ public class BottomFragment extends ListFragment {
 	}
 
 	@Override
-	public void setUserVisibleHint(boolean visable) {
+	public void onResume() {
 		// TODO Auto-generated method stub
-		super.setUserVisibleHint(visable);
-		if (visable) {
-			mMealAdapter = new MealAdapter(getActivity());
-			mMealAdapter.setAutoload(false);
-			mMealAdapter.loadObjects();
-			setListAdapter(createAdapter());
-		}
+		super.onResume();
+		mMealAdapter = new MealAdapter(getActivity());
+		mMealAdapter.setAutoload(false);
+		mMealAdapter.loadObjects();
+		setListAdapter(createAdapter());
 	}
 }

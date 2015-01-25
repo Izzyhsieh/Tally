@@ -45,6 +45,7 @@ public class PostPictureActivity extends ActionBarActivity {
 	private ParseFile photoFile;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	private Context mContext;
+	private MealAdapter mainAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,14 +97,11 @@ public class PostPictureActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// rotate image
 				if (bitmap == null) {
-					Toast.makeText(getApplicationContext(),
-							R.string.msg_warning_rotate, Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(getApplicationContext(), R.string.msg_warning_rotate, Toast.LENGTH_SHORT).show();
 				} else {
 					Matrix matrix = new Matrix();
 					matrix.setRotate(90);
-					Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
-							bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+					Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 					bitmap = rotatedBitmap; // re-asign for user would
 											// re-clicked rotate and functional
 					mPic.setImageBitmap(rotatedBitmap);
@@ -133,10 +131,7 @@ public class PostPictureActivity extends ActionBarActivity {
 		// To be safe, you should check that the SDCard is mounted
 		// using Environment.getExternalStorageState() before doing this.
 
-		File mediaStorageDir = new File(
-				Environment
-						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-				"MyCameraApp");
+		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyCameraApp");
 		// This location works best if you want the created images to be shared
 		// between applications and persist after your app has been uninstalled.
 
@@ -149,12 +144,10 @@ public class PostPictureActivity extends ActionBarActivity {
 		}
 
 		// Create a media file name
-		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
-				.format(new Date());
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 		File mediaFile;
 		if (type == MEDIA_TYPE_IMAGE) {
-			mediaFile = new File(mediaStorageDir.getPath() + File.separator
-					+ "IMG_" + timeStamp + ".jpg");
+			mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
 		} else {
 			return null;
 		}
@@ -197,8 +190,7 @@ public class PostPictureActivity extends ActionBarActivity {
 			mScale = (float) phone / (float) bitmap.getWidth();
 			Matrix mMat = new Matrix();
 			mMat.setScale(mScale, mScale);
-			Bitmap mScaleBitmap = Bitmap.createBitmap(bitmap, 0, 0,
-					bitmap.getWidth(), bitmap.getHeight(), mMat, false);
+			Bitmap mScaleBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), mMat, false);
 			mPic.setImageBitmap(mScaleBitmap);
 			this.bitmap = mScaleBitmap;
 		} else {
@@ -231,9 +223,7 @@ public class PostPictureActivity extends ActionBarActivity {
 
 		// Save the scaled image to Parse
 
-		photoFile = new ParseFile(
-				new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())
-						+ ".jpg", scaledData);
+		photoFile = new ParseFile(new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg", scaledData);
 		photoFile.saveInBackground();
 
 		// create new Meal
@@ -245,11 +235,9 @@ public class PostPictureActivity extends ActionBarActivity {
 			@Override
 			public void done(ParseException e) {
 				if (e != null) {
-					Toast.makeText(mContext, "Error saving: " + e.getMessage(),
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(mContext, "Error saving: " + e.getMessage(), Toast.LENGTH_LONG).show();
 				} else {
-					Toast.makeText(mContext, "Picture uploaded",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(mContext, "Picture uploaded", Toast.LENGTH_LONG).show();
 					finish();
 				}
 			}
