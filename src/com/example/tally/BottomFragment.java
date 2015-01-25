@@ -49,6 +49,7 @@ public class BottomFragment extends ListFragment {
 	private int mScrollY;
 	private int mMinRawY = 0;
 
+	private MealAdapter mMealAdapter;
 	private TranslateAnimation anim;
 
 	@Override
@@ -80,16 +81,16 @@ public class BottomFragment extends ListFragment {
 				mListView.computeScrollY();
 			}
 		});
-		
+
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				FeedImageView imageView = (FeedImageView) view.findViewById(R.id.image_view); 
+				FeedImageView imageView = (FeedImageView) view.findViewById(R.id.image_view);
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), EnlargeImageViewActivity.class);
-				//get ParseObject the image's url via adapter
+				// get ParseObject the image's url via adapter
 				ParseObject meal = (ParseObject) parent.getAdapter().getItem(position);
 				String imageURL = meal.getParseFile("image").getUrl();
 				intent.putExtra("imageURL", imageURL);
@@ -100,7 +101,7 @@ public class BottomFragment extends ListFragment {
 				intent.putExtra("locationY", location[1]);
 				intent.putExtra("width", imageView.getWidth());
 				intent.putExtra("height", imageView.getHeight());
-				startActivity(intent); 
+				startActivity(intent);
 			}
 		});
 
@@ -185,5 +186,17 @@ public class BottomFragment extends ListFragment {
 		// TODO Auto-generated method stub
 		Intent i = new Intent(getActivity(), PostPictureActivity.class);
 		startActivity(i);
+	}
+
+	@Override
+	public void setUserVisibleHint(boolean visable) {
+		// TODO Auto-generated method stub
+		super.setUserVisibleHint(visable);
+		if (visable) {
+			mMealAdapter = new MealAdapter(getActivity());
+			mMealAdapter.setAutoload(false);
+			mMealAdapter.loadObjects();
+			setListAdapter(createAdapter());
+		}
 	}
 }
