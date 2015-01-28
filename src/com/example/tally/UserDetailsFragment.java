@@ -164,7 +164,9 @@ public class UserDetailsFragment extends Fragment{
 
 	protected void onLogoutButtonClicked() {
 		// TODO Auto-generated method stub
-		
+		// Log the user out
+		ParseUser.logOut();
+		startLoginActivity();
 	}
 
 	@Override

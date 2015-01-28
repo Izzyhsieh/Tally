@@ -31,11 +31,6 @@
             </intent-filter>
         </activity>
         
-        <activity 
-            android:name=".UserDetailsActivity" 
-            android:label="@string/title_activity_user_details"
-            android:screenOrientation="portrait"/>
-        
         <activity android:name=".ViewPagerActivity"
             	  android:label="@string/title_activity_view_pager" 
             	  android:screenOrientation="portrait"/>
