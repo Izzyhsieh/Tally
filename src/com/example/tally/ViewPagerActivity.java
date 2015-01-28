@@ -18,9 +18,11 @@ public class ViewPagerActivity extends FragmentActivity {
 	private ViewPagerAdapter _adapter;
 	private ImageView mainPage;
 	private ImageView personalPage;
+	private ImageView userPage;
 	
 	//color filter
 	ColorFilter colorFilter = new PorterDuffColorFilter(R.color.l_blue, Mode.SRC_IN);
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class ViewPagerActivity extends FragmentActivity {
    	 _mViewPager = (ViewPager) findViewById(R.id.viewPager);
      _adapter = new ViewPagerAdapter(getApplicationContext(),getSupportFragmentManager());
      _mViewPager.setAdapter(_adapter);
-	 _mViewPager.setCurrentItem(0);
+	 _mViewPager.setCurrentItem(1);
 	 
 	 LinearLayout _mFirstTab = (LinearLayout) findViewById(R.id.first_text);	 
 	 _mFirstTab.setOnClickListener(new View.OnClickListener() {
@@ -44,13 +46,22 @@ public class ViewPagerActivity extends FragmentActivity {
 			_mViewPager.setCurrentItem(0, true);
 		}
 	});
+	 LinearLayout _mMidTab = (LinearLayout) findViewById(R.id.mid_text);	 
+	 _mMidTab.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			_mViewPager.setCurrentItem(1, true);
+		}
+	});
 	 LinearLayout _mSecondTab = (LinearLayout) findViewById(R.id.second_text);
 	 _mSecondTab.setOnClickListener(new View.OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			_mViewPager.setCurrentItem(1, true);
+			_mViewPager.setCurrentItem(2, true);
 		}
 	});
 	 
@@ -66,20 +77,27 @@ public class ViewPagerActivity extends FragmentActivity {
 						public void onPageSelected(int position) {
 							mainPage = (ImageView) findViewById(R.id.main_page);
 					        personalPage = (ImageView) findViewById(R.id.personal_page);
+					        userPage = (ImageView) findViewById(R.id.user_details);
 							// TODO Auto-generated method stub
 							switch(position){
 							case 0:
 								//findViewById(R.id.first_tab).setVisibility(View.VISIBLE);
 								//findViewById(R.id.second_tab).setVisibility(View.INVISIBLE);
+								userPage.setColorFilter(colorFilter);
+								personalPage.setColorFilter(null);
+								mainPage.setColorFilter(null);
+								break;
+							case 1:
 								mainPage.setColorFilter(colorFilter);
 								personalPage.setColorFilter(null);
+								userPage.setColorFilter(null);
 								break;
-								
-							case 1:
+							case 2:
 								//findViewById(R.id.first_tab).setVisibility(View.INVISIBLE);
 								//findViewById(R.id.second_tab).setVisibility(View.VISIBLE);
-								mainPage.setColorFilter(null);
 								personalPage.setColorFilter(colorFilter);
+								mainPage.setColorFilter(null);
+								userPage.setColorFilter(null);
 								break;
 							}
 						}

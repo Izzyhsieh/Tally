@@ -3,11 +3,11 @@ package com.example.tally;
 import java.util.Arrays;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -18,7 +18,7 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends FragmentActivity {
 
 	private Button loginButton;
 	private Dialog progressDialog;
@@ -106,9 +106,13 @@ public class LoginActivity extends Activity {
 		
 	}
 	
-	private void showUserDetailsActivity() {
+	/*private void showUserDetailsFragment() {
+		UserDetailsFragment userDetailFragment = new UserDetailsFragment();
+		userDetailFragment.setArguments(getIntent().getExtras());
+		getSupportFragmentManager().beginTransaction().add(, userDetailFragment).commit();
+		
 		Intent intent = new Intent(this, UserDetailsActivity.class);
 		startActivity(intent);
 		onBackPressed();
-	}
+	}*/
 }

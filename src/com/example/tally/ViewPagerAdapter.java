@@ -19,9 +19,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 		Fragment f = new Fragment();
 		switch (position) {
 		case 0:
-			f = new BottomFragment();
+			f = UserDetailsFragment.newInstance(_context);
 			break;
 		case 1:
+			f = new BottomFragment();
+			break;
+		case 2:
 			f = new LayoutTwo();
 			break;
 		}
@@ -30,7 +33,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
-		return 2;
+		return 3;
 	}
 
 }
