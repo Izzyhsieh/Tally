@@ -5,6 +5,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -46,6 +48,7 @@ public class PostPictureActivity extends ActionBarActivity {
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	private Context mContext;
 	private MealAdapter mainAdapter;
+	private Dialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -174,7 +177,7 @@ public class PostPictureActivity extends ActionBarActivity {
 				if (bitmap.getWidth() > bitmap.getHeight())
 					ScalePic(bitmap, mPhone.heightPixels);
 				else
-					ScalePic(bitmap, 300);
+					ScalePic(bitmap, 250);
 
 			} catch (Exception e) {
 				Log.e("ERROR", e.toString());
@@ -216,6 +219,7 @@ public class PostPictureActivity extends ActionBarActivity {
 
 	private void postPicMeal() {
 		// save image to parse object
+		PostPictureActivity.this.progressDialog = ProgressDialog.show(PostPictureActivity.this, "", "Uploading...", true);
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
 
@@ -234,6 +238,7 @@ public class PostPictureActivity extends ActionBarActivity {
 		meal.saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException e) {
+				PostPictureActivity.this.progressDialog.dismiss();
 				if (e != null) {
 					Toast.makeText(mContext, "Error saving: " + e.getMessage(), Toast.LENGTH_LONG).show();
 				} else {
