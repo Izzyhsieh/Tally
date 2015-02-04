@@ -3,7 +3,9 @@ package com.example.tally;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -35,7 +37,7 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 		super(context, queryFactory);
 	}
 
-	public View getItemView(ParseObject meal, View v, ViewGroup parent) {
+	public View getItemView(final ParseObject meal, View v, ViewGroup parent) {
 
 		if (v == null) {
 			v = View.inflate(getContext(), R.layout.list_item, null);
@@ -44,10 +46,29 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 		super.getItemView(meal, v, parent);
 		TextView name = (TextView) v.findViewById(R.id.name);
 		TextView timestamp = (TextView) v.findViewById(R.id.timestamp);
-		RatingBar rating = (RatingBar) v.findViewById(R.id.ratingBar);
 		ProfilePictureView profilePic = (ProfilePictureView) v.findViewById(R.id.profilePic);
-		FeedImageView imageView = (FeedImageView) v.findViewById(R.id.image_view);
+		final FeedImageView imageView = (FeedImageView) v.findViewById(R.id.image_view);
+		imageView.setOnClickListener(new OnClickListener(){
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(getContext(), EnlargeImageViewActivity.class);
+				String imageURL = meal.getParseFile("image").getUrl();
+				intent.putExtra("imageURL", imageURL);
+				int[] location = new int[2];
+				imageView.getLocationOnScreen(location);
+				intent.putExtra("locationX", location[0]);
+				intent.putExtra("locationY", location[1]);
+				intent.putExtra("width", imageView.getWidth());
+				intent.putExtra("height", imageView.getHeight());
+				getContext().startActivity(intent);
+			}
+			
+		});
+		
+		RatingBar rating = (RatingBar) v.findViewById(R.id.ratingBar);
 		// user profile
 		try {
 			ParseUser user = meal.getParseUser("owner").fetchIfNeeded();
