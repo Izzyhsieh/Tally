@@ -2,7 +2,6 @@ package com.example.tally;
 
 import org.json.JSONObject;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -24,8 +23,6 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class MealAdapter extends ParseQueryAdapter<ParseObject> {
-	
-	private Dialog progressDialog;
 
 	public MealAdapter(Context context) {
 		super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
@@ -55,7 +52,7 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 		TextView timestamp = (TextView) v.findViewById(R.id.timestamp);
 		ProfilePictureView profilePic = (ProfilePictureView) v.findViewById(R.id.profilePic);
 		final FeedImageView imageView = (FeedImageView) v.findViewById(R.id.image_view);
-		imageView.setOnClickListener(new OnClickListener(){
+		imageView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -72,36 +69,36 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 				intent.putExtra("height", imageView.getHeight());
 				getContext().startActivity(intent);
 			}
-			
+
 		});
-		
+
 		RatingBar rating = (RatingBar) v.findViewById(R.id.ratingBar);
-		rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener(){
+		rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 			@Override
-			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+			public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
 				// TODO Auto-generated method stub
 				Log.d("onRatingChanged", String.valueOf(rating));
 				ParseObject rate = new ParseObject("Rating");
 				rate.put("r_user", ParseUser.getCurrentUser());
 				rate.put("r_picture_id", meal.getObjectId());
-				rate.put("r_value",String.valueOf(rating));
-				rate.saveInBackground(new SaveCallback(){
+				rate.put("r_value", String.valueOf(rating));
+				rate.saveInBackground(new SaveCallback() {
 
 					@Override
 					public void done(ParseException arg0) {
 						// TODO Auto-generated method stub
 						if (arg0 != null) {
-							Toast.makeText(getContext(),"Error Rating : " + arg0.getMessage() , Toast.LENGTH_SHORT).show();
-						}else{
-							Toast.makeText(getContext(), "Rated", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getContext(), "Error Rating : " + arg0.getMessage(), Toast.LENGTH_SHORT).show();
+						} else {
+							Toast.makeText(getContext(), "Rated value = " + String.valueOf(rating), Toast.LENGTH_SHORT).show();
 						}
 					}
-					
+
 				});
 			}
 		});
-		
+
 		// user profile
 		try {
 			ParseUser user = meal.getParseUser("owner").fetchIfNeeded();
@@ -124,8 +121,8 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 			e.printStackTrace();
 		}
 		timestamp.setText(meal.getCreatedAt().toLocaleString());
-		//rating.setRating(meal.getNumber("rate").floatValue());
-		setRatingValue();
+		// rating.setRating(meal.getNumber("rate").floatValue());
+		setRatingValue(meal.getObjectId());
 
 		// image view
 		ParseFile photoFile = meal.getParseFile("image");
@@ -156,8 +153,12 @@ public class MealAdapter extends ParseQueryAdapter<ParseObject> {
 		return v;
 	}
 
-	private void setRatingValue() {
+	private void setRatingValue(String id) {
 		// TODO Auto-generated method stub
-		//implement re-get rating value
+		// query
+		ParseQuery rQuery = new ParseQuery("Rating");
+		rQuery.whereEqualTo("objectId", id);
+		// calculate
+		// todo......
 	}
 }
