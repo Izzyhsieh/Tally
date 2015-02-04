@@ -70,5 +70,12 @@
 		<item name="android:background">@color/l_blue</item>
 		<item name="android:orientation">vertical</item>
     </style>
-	
+	<style name="myRatingBar"
+	       parent="@android:style/Widget.RatingBar">
+	    <item name="android:progressDrawable">@drawable/login_button_normal</item>
+	    <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
+	</style>
+        
+        
 </resources>

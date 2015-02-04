@@ -162,7 +162,7 @@ public class BottomFragment extends ListFragment {
 		startActivity(i);
 	}
 
-	@Override
+	/*@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
@@ -170,5 +170,5 @@ public class BottomFragment extends ListFragment {
 		mMealAdapter.setAutoload(false);
 		mMealAdapter.loadObjects();
 		setListAdapter(createAdapter());
-	}
+	}*/
 }

@@ -33,9 +33,9 @@ public class EnlargeImageViewActivity extends Activity{
 		imageView = new SmoothImageView(this);
 		imageView.setOriginalInfo(mWidth, mHeight, mLocationX, mLocationY);
 		imageView.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
+		imageView.transformIn();
 		imageView.setScaleType(ScaleType.FIT_CENTER);
 		setContentView(imageView);
 		imageView.setImageUrl(imageURL, AppController.getInstance().getImageLoader());
-		imageView.transformIn();
 	}
 }
