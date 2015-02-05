@@ -51,12 +51,13 @@
                     android:textColor="@color/d_gray"
                     android:textSize="@dimen/item_timestamp" />
 
-<!--                 <TextView 
-                    android:id="@+id/rating"
+                <TextView
+                    android:id="@+id/score_result"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/l_blue"
-                    android:textSize="@dimen/item_timestamp"/> -->
+                    android:textColor="@color/d_gray"
+                    android:gravity="right"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
             </LinearLayout>
         </LinearLayout>
         

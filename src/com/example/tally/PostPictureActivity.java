@@ -234,7 +234,8 @@ public class PostPictureActivity extends ActionBarActivity {
 		ParseObject meal = new ParseObject("Picture");
 		meal.put("owner", ParseUser.getCurrentUser());
 		meal.put("image", photoFile);
-		meal.put("rate", 0);
+		meal.put("sum", 0.0);
+		meal.put("count", 0);
 		meal.saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException e) {
